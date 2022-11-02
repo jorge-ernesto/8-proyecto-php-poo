@@ -12,11 +12,14 @@ function show_error(){
 	$error->index();
 }
 
+// error_log(json_encode($_GET)); //Debug
 if(isset($_GET['controller'])){
 	$nombre_controlador = $_GET['controller'].'Controller';
+	// error_log($nombre_controlador); //Debug
 
 }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
 	$nombre_controlador = controller_default;
+	// error_log($nombre_controlador); //Debug
 	
 }else{
 	show_error();
@@ -29,9 +32,11 @@ if(class_exists($nombre_controlador)){
 	if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
 		$action = $_GET['action'];
 		$controlador->$action();
+		// error_log($action); //Debug
 	}elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
 		$action_default = action_default;
 		$controlador->$action_default();
+		// error_log($action_default); //Debug
 	}else{
 		show_error();
 	}

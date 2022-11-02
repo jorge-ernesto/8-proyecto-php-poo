@@ -45,5 +45,18 @@ class categoriaController{
 		}
 		header("Location:".base_url."categoria/index");
 	}
+
+	public function delete(){
+		Utils::isAdmin();
+		// error_log('Function delete');
+		// error_log(json_encode($_POST));
+		if(isset($_POST) && isset($_POST['id'])){
+			// Elimina la categoria en bd
+			$categoria = new Categoria();
+			$categoria->setId($_POST['id']);
+			$delete = $categoria->delete();
+		}
+		header("Location:".base_url."categoria/index");
+	}
 	
 }
